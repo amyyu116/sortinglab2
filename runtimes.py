@@ -20,9 +20,10 @@ if __name__ == '__main__':
     parser.add_argument('--input', choices=['sorted', 'random'], default='random')
     args = parser.parse_args()
 
+    print ("|2**x| timsort | merge_sorted| quick_sorted|")
+    print ("|------|-----|------|----|")
     # perform the runtime tests
     for x in range(0, args.max_x+1):
-
         if args.input == 'random':
             # generate a random list for us to sort;
             # the seed ensures that we generate the same random list on every run of the program
@@ -46,7 +47,7 @@ if __name__ == '__main__':
         runtimes['timsort'] = timeit.timeit(lambda: sorted(xs), number=1)
         runtimes['merge_sorted'] = timeit.timeit(lambda: merge_sorted(xs), number=1)
         runtimes['quick_sorted'] = timeit.timeit(lambda: quick_sorted(xs), number=1)
-
+        print (f"| 2**{x} | {runtimes['timsort']:0.2e} | {runtimes['merge_sorted']:0.2e} | {runtimes['quick_sorted']:0.2e} |")
 
         # display the runtimes
         # FIXME 1:
@@ -55,7 +56,6 @@ if __name__ == '__main__':
         # You will have to look up how to do this formatting.
         # In order to get a proper markdown table,
         # you will have to also print a header line somewhere else.
-        print(f'len(xs)=2**{x} runtimes={runtimes}')
 
         # HINT:
         # use f-strings and a print statement that looks something like
